@@ -6,9 +6,9 @@ const NavBar = () => {
   return (
     <nav className="navbar bg-body-tertiary py-50" style={{ padding: "20px" }}>
       <div className="container d-flex justify-content-around">
-        <Link className="navbar-brand" to="/">
+        <a className="navbar-brand" to href="/">
           <h4 style={{ fontWeight: "bold" }}>Notey</h4>
-        </Link>
+        </a>
         <div className="d-flex">
           <div
             className="input-group input-group-sm"
@@ -27,7 +27,7 @@ const NavBar = () => {
           {/* <button className="btn btn-outline-primary btn-md" type="button">Add</button> */}
         </div>
 
-        <Link to="/add-notes"  style={{ textDecoration: "none" }}>
+        <Link to="/add-note"  style={{ textDecoration: "none" }}>
           <button
             className="btn btn-outline-primary btn-md"
             type="button"
