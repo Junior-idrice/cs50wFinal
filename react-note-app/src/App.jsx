@@ -1,7 +1,9 @@
 import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router-dom'
 import HomePage from './pages/HomePage'   // default export assumed
 import MainLayout from './layout/MainLayout'
+import NoteDetailPage from './pages/NoteDetailPage'
 import AddNotePage from './pages/AddNotePage'
+import EditNotePage from './pages/EditNotePage'
 
 const App = () => {
   const router = createBrowserRouter(
@@ -9,7 +11,9 @@ const App = () => {
       <Route path="/" element={<MainLayout/>}>
       <Route index element={<HomePage />} />
       <Route path="/add-note" element={<AddNotePage />} />
-
+      <Route path="/edit-note" element={<EditNotePage/>}/>
+      <Route path="/note-detail" element={<NoteDetailPage/>}/>
+      
       </Route>
       
     )

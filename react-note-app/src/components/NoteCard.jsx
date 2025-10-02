@@ -2,9 +2,9 @@
 
 import { FaNoteSticky } from "react-icons/fa6";
 import { FaBookOpenReader } from "react-icons/fa6";
-
+import {Link} from "react-router-dom"
 import { MdMarkunread } from "react-icons/md";
-import { Link } from "react-router-dom";
+
 
 const NoteCard = ({color}) => {
   return (
@@ -12,7 +12,10 @@ const NoteCard = ({color}) => {
                 <div className="card card-body">
                     <span className="side-stick" style={{backgroundColor: "blue"}}></span>
                     <FaNoteSticky style={{marginLeft: "auto", color: "blue"}}/>
+                    <Link to="note-detail" style={{textDecoration:"none", color:"black"}}>
                     <h5 className="note-title text-truncate w-75 mb-0" data-noteheading="Book a Ticket for Movie">Book a Ticket for Movie </h5>
+                    </Link>
+                    
                     <p className="note-date font-12 text-muted">11 March 2009</p>
                     <div className="note-content">
                         <p className="note-inner-content text-muted" data-notecontent="Blandit tempus porttitor aasfs. Integer posuere erat a ante venenatis.">Blandit tempus porttitor aasfs. Integer posuere erat a ante venenatis.</p>
