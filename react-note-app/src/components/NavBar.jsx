@@ -6,9 +6,9 @@ const NavBar = () => {
   return (
     <nav className="navbar bg-body-tertiary py-50" style={{ padding: "20px" }}>
       <div className="container d-flex justify-content-around">
-        <a className="navbar-brand" to href="/">
+        <Link className="navbar-brand" to="/">
           <h4 style={{ fontWeight: "bold" }}>Notey</h4>
-        </a>
+        </Link>
         <div className="d-flex">
           <div
             className="input-group input-group-sm"
