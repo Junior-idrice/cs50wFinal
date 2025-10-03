@@ -1,7 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./AddNotePage.css"
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
 
 const EditNotePage = () => {
+
+  const [title,setTitle]=useState("")
+  const [body,setBody]=useState("")
+  const [category,setCategory]=useState("")
+
+
+
+  const {slug} = useParams()
+  useEffect(()=>{
+    axios.get(`http://127.0.0.1:8000/notes/${slug}`)
+    .then(res=>{
+      console.log(res.data)
+      setTitle(res.data.title)
+      setBody(res.data.body)
+      setCategory(res.data.category)
+    })
+    .catch(err=>{
+      console.log(err.message)
+    })
+  })
+
+
   return (
       <form>
       <h5>Add New Note</h5>
@@ -10,10 +34,10 @@ const EditNotePage = () => {
           Title
         </label>
         <input
-          type="email"
           className="form-control"
           id="exampleFormControlInput1"
           placeholder="Enter note's title"
+          value={title}
         />
       </div>
 
@@ -26,6 +50,7 @@ const EditNotePage = () => {
           id="exampleFormControlTextarea1"
           rows={4}
           placeholder="Enter note's content"
+          value={body}
         ></textarea>
       </div>
 
@@ -33,11 +58,11 @@ const EditNotePage = () => {
       <label htmlFor="exampleFormControlTextarea1" className="form-label">
           Note's category
         </label>
-      <select className="form-select" aria-label="Default select example" style={{height: "40px"}}>
-          <option selected>Pick a category</option>
-          <option value="1">Business</option>
-          <option value="2">Personal</option>
-          <option value="3">Important</option>
+      <select className="form-select" aria-label="Default select example" value={category} style={{height: "40px"}}>
+          <option value="">Pick a category</option>
+          <option value="BUSINESS">Business</option>
+          <option value="PERSONLA">Personal</option>
+          <option value="IMPORTANT">Important</option>
         </select>
       </div>
 

@@ -6,6 +6,8 @@ import { FiEdit } from "react-icons/fi";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { FormatDate } from "../components/FormatDate";
+
+
 const NotePage = () => {
 
   const [note, setNote]=useState({})
@@ -31,7 +33,7 @@ const NotePage = () => {
     <p className="note-date font-12 text-muted me-5">last updated:{FormatDate(note.updated)} </p>
     </span>
     <span className="button-group">
-        <Link to="/edit-note">
+        <Link to={`/edit-note/${slug}`}>
         <button className="btn btn-primary"><FiEdit /><span>Edit</span></button>
         </Link>
       
