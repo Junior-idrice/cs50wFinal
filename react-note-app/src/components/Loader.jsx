@@ -1,8 +1,19 @@
 import React from 'react'
+import { ClipLoader } from "react-spinners";
 
 const Loader = () => {
   return (
-    <div>Loader</div>
+    <>
+       <ClipLoader
+        
+        loading={loading}
+        cssOverride={override}
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+      </>
+    
   )
 }
 
