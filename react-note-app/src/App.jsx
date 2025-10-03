@@ -33,7 +33,7 @@ const App = () => {
       <Route index element={<HomePage notes={notes} loading = {isLoading}/>} />
       <Route path="/add-note" element={<AddNotePage />} />
       <Route path="/edit-note" element={<EditNotePage/>}/>
-      <Route path="/note-detail" element={<NoteDetailPage/>}/>
+      <Route path="/notes/:slug" element={<NoteDetailPage/>}/>
       
       </Route>
       
