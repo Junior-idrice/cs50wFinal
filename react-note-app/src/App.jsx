@@ -16,14 +16,18 @@ const App = () => {
     axios.get("http://127.0.0.1:8000/notes/") //return a promise
     .then(res=>{
       console.log(res.data)
+      setNotes(res.data)
+    })
+    .catch(err =>{
+      console.log(err.message)
     })
 
-  })
+  },[])// you put the [](array) to make the useeffect run just one time, other wise it is gonna run multiple times
 
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<MainLayout/>}>
-      <Route index element={<HomePage />} />
+      <Route index element={<HomePage notes={notes}/>} />
       <Route path="/add-note" element={<AddNotePage />} />
       <Route path="/edit-note" element={<EditNotePage/>}/>
       <Route path="/note-detail" element={<NoteDetailPage/>}/>

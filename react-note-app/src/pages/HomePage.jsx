@@ -5,11 +5,11 @@ import NoteCardContainer from '../components/NoteCardContainer'
 
 
 
-const HomePage = () => {
+const HomePage = ({notes}) => {
   return(
   <>
    <Filter/>
-   <NoteCardContainer/>
+   <NoteCardContainer notes={notes}/>
   </>
   )
 }
