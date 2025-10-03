@@ -2,7 +2,7 @@ import React from 'react'
 import { MdMarkunread } from "react-icons/md";
 import { FaNoteSticky } from "react-icons/fa6";
 import { Link } from "react-router-dom"
-//import { FormatDate } from './FormatDate';
+import { FormatDate } from './FormatDate';
 
 
 const NoteCard = ({note}) => {
@@ -24,7 +24,7 @@ const NoteCard = ({note}) => {
         </h5>
         </Link>
         
-        
+        <p className="note-date font-12 text-muted">{FormatDate(note.updated)}</p>
         <div className="note-content">
           <p
             className="note-inner-content text-muted"
