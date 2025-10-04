@@ -14,16 +14,36 @@ const App = () => {
   const[notes,setNotes] = useState([])
   const[isLoading, setIsLoading] =useState(false)
   const [filterText, setFilterText] = useState("")
+  const [searchText, setSearchText] = useState("")
 
 
   const handleFilterText = (val)=>{
     setFilterText(val)
   }
+
+  const handleSearchText = (val) => {
+    setSearchText(val)
+  }
+
+
   const filterNotes = filterText === "BUSINESS"
   ?notes.filter(note=>note.category == "BUSINESS")
   :filterText === "PERSONLA"? notes.filter(note=>note.category == "PERSONLA")
   :filterText === "IMPORTANT"? notes.filter(note=>note.category == "IMPORTANT"):
   notes
+
+
+  useEffect(()=>{
+    if(searchText.length<3) return ;
+    axios.get(`http://127.0.0.1:8000/notes-search/?search=${searchText}`)
+    
+    .then(res=>{
+      console.log(res.data)
+      setNotes(res.data)
+    })
+    .catch(err=>console.log(err.message))
+
+  },[searchText])
 
 
   useEffect(()=>{
@@ -81,7 +101,7 @@ const App = () => {
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<MainLayout/>}>
+      <Route path="/" element={<MainLayout searchText={searchText} handleSearchText={handleSearchText}/>}>
       <Route index element={<HomePage 
       notes={filterNotes} loading = {isLoading}  handleFilterText={ handleFilterText}/>} />
       <Route path="/add-note" element={<AddNotePage addNote={addNote} />} />
