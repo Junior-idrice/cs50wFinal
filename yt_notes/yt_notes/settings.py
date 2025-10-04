@@ -35,7 +35,9 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     "cs50wfinal-1.onrender.com",
+    "cs50wfinali.onrender.com",
 ]
+
 
 # Application definition
 
