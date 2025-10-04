@@ -134,6 +134,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
    
     "http://localhost:5173",
-    "https://cs50wfinali.onrender.com"
+    "https://cs50wfinali.onrender.com",
+     "https://react-note-app.onrender.com", 
 
 ]
