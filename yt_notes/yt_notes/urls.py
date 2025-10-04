@@ -16,8 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.http import JsonResponse
 
-urlpatterns = [
+'''urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include("noteapp.urls"))
+]'''
+
+
+def home(request):
+    return JsonResponse({"message": "Welcome to the Notes API"})
+
+urlpatterns = [
+    path("", home),  # root endpoint
+    path("admin/", admin.site.urls),
+    path("", include("noteapp.urls")),  # include your app's URLs
 ]
