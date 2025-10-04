@@ -90,7 +90,8 @@ const App = () => {
   const deleteNote = (slug)=>{
     axios.delete(`http://127.0.0.1:8000/notes/${slug}/`)
     .then(res=>{
-      setNotes([...notes])
+      setNotes(notes.filter(note => note.slug !== slug))
+     
     })
     .catch(err=>{
       console.log(err.message)
