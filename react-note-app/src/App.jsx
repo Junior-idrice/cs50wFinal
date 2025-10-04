@@ -33,7 +33,7 @@ const App = () => {
   notes
 
 
-  useEffect(()=>{
+  /*useEffect(()=>{
     if(searchText.length<3) return ;
     axios.get(`http://127.0.0.1:8000/notes-search/?search=${searchText}`)
     
@@ -43,7 +43,40 @@ const App = () => {
     })
     .catch(err=>console.log(err.message))
 
-  },[searchText])
+  },[searchText])*/
+
+  useEffect(() => {
+  if (searchText === "") {
+    // reset to all notes
+    axios.get("http://127.0.0.1:8000/notes/")
+      .then(res => setNotes(res.data))
+      .catch(err => console.log(err.message))
+    return;
+  }
+
+  if (searchText.length < 3) return;
+
+  axios.get(`http://127.0.0.1:8000/notes-search/?search=${searchText}`)
+    .then(res => {
+      console.log(res.data);
+      setNotes(res.data);
+    })
+    .catch(err => console.log(err.message));
+}, [searchText]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   useEffect(()=>{
@@ -63,7 +96,7 @@ const App = () => {
   const addNote = (data)=>{
     axios.post("http://127.0.0.1:8000/notes/", data)
     .then(res =>{
-      setNotes([...notes, res.data])
+      setNotes([res.data,...notes ])
       toast.success("new note added successfully")
       console.log(res.data)
     })

@@ -144,3 +144,9 @@ CORS_ALLOWED_ORIGINS = [
      "https://react-note-app.onrender.com", 
 
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://react-note-app.onrender.com",   # trust frontend
+    "https://cs50wfinal-1.onrender.com",     # trust backend domain
+    "https://cs50wfinali.onrender.com",
+]

@@ -10,7 +10,7 @@ from django.db.models import Q
 @api_view(["GET","POST"])
 def notes(request):
     if request.method == "GET":
-        notes = Note.objects.all()
+        notes = Note.objects.all().order_by("-created")
         serializer = NoteSerializer(notes, many=True)
         return Response(serializer.data)
     elif request.method == "POST":
