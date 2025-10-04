@@ -21,7 +21,7 @@ class Note(models.Model):
         return self.title
 
     
-    def save(self, *args, **kwargs):
+    '''def save(self, *args, **kwargs):
         slug_base = slugify(self.title)
         slug = slug_base
 
@@ -29,4 +29,17 @@ class Note(models.Model):
             slug = f'{slug_base}--{get_random_string(5)}'
 
         self.slug = slug
+        super().save(*args, **kwargs)'''
+    def save(self, *args, **kwargs):
+        # Only generate slug if it doesn't exist already
+        if not self.slug:
+            slug_base = slugify(self.title)
+            slug = slug_base
+
+            # Ensure uniqueness
+            while self.__class__.objects.filter(slug=slug).exists():
+                slug = f'{slug_base}-{get_random_string(5)}'
+
+            self.slug = slug
+
         super().save(*args, **kwargs)

@@ -37,11 +37,11 @@ const NoteCard = ({note}) => {
        
 
           <span className="d-flex justify-contents-around">
-            <a href="/notes-detail">
+            <Link  to={`/notes/${note.slug}`}>
               <MdMarkunread
                 style={{ fontSize: "25px", cursor: "pointer", color: color }}
               />
-            </a>
+            </Link>
 
             <small className="text-muted">{note.category}</small>
           </span>

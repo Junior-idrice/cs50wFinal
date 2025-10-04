@@ -31,7 +31,7 @@ const App = () => {
   const addNote = (data)=>{
     axios.post("http://127.0.0.1:8000/notes/", data)
     .then(res =>{
-      setNotes([...notes, data])
+      setNotes([...notes, res.data])
       toast.success("new note added successfully")
       console.log(res.data)
     })
@@ -39,6 +39,22 @@ const App = () => {
       console.log(err.message)
     })
   }
+   const updateNote = (data, slug)=>{
+    axios.put(`http://127.0.0.1:8000/notes/${slug}/`, data)
+    .then(res=>{
+      console.log(res.data)
+       setNotes(prevNotes =>
+        prevNotes.map(note => 
+          note.slug === slug ? res.data : note
+        )
+      )
+      toast.success("Note updated well")
+    })
+    .catch(err=>{
+      console.log(err.message)
+    })
+  }
+
 
 
   const router = createBrowserRouter(
@@ -46,13 +62,15 @@ const App = () => {
       <Route path="/" element={<MainLayout/>}>
       <Route index element={<HomePage notes={notes} loading = {isLoading}/>} />
       <Route path="/add-note" element={<AddNotePage addNote={addNote} />} />
-      <Route path="/edit-note/:slug" element={<EditNotePage/>}/>
+      <Route path="/edit-note/:slug" element={<EditNotePage updateNote={updateNote}/> }/>
       <Route path="/notes/:slug" element={<NoteDetailPage/>}/>
       
       </Route>
       
     )
   )
+
+ 
 
   return (
     <RouterProvider router={router} />

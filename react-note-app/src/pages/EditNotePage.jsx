@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import "./AddNotePage.css"
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 
-const EditNotePage = () => {
+const EditNotePage = ({updateNote}) => {
 
   const [title,setTitle]=useState("")
   const [body,setBody]=useState("")
@@ -12,8 +12,9 @@ const EditNotePage = () => {
 
 
   const {slug} = useParams()
+  const navigate = useNavigate()
   useEffect(()=>{
-    axios.get(`http://127.0.0.1:8000/notes/${slug}`)
+    axios.get(`http://127.0.0.1:8000/notes/${slug}/`)
     .then(res=>{
       console.log(res.data)
       setTitle(res.data.title)
@@ -23,12 +24,25 @@ const EditNotePage = () => {
     .catch(err=>{
       console.log(err.message)
     })
-  })
+  },[slug])
+
+  const updateNoteObject = {
+    title:title,
+    body:body,
+    category:category
+  }
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+    if(!title && !body &&!category)return;
+    console.log(updateNoteObject)
+    updateNote(updateNoteObject, slug)
+    navigate(`/notes/${slug}`)
+  }
 
 
   return (
-      <form>
-      <h5>Add New Note</h5>
+      <form onSubmit={handleSubmit}>
+      <h5>Update Note</h5>
       <div className="mb-3">
         <label htmlFor="exampleFormControlInput1" className="form-label">
           Title
@@ -38,6 +52,7 @@ const EditNotePage = () => {
           id="exampleFormControlInput1"
           placeholder="Enter note's title"
           value={title}
+          onChange={(e)=>setTitle(e.target.value)}
         />
       </div>
 
@@ -51,6 +66,7 @@ const EditNotePage = () => {
           rows={4}
           placeholder="Enter note's content"
           value={body}
+          onChange={(e)=>setBody(e.target.value)}
         ></textarea>
       </div>
 
@@ -58,7 +74,7 @@ const EditNotePage = () => {
       <label htmlFor="exampleFormControlTextarea1" className="form-label">
           Note's category
         </label>
-      <select className="form-select" aria-label="Default select example" value={category} style={{height: "40px"}}>
+      <select className="form-select" aria-label="Default select example" value={category} onChange={(e)=>setCategory(e.target.value)} style={{height: "40px"}}>
           <option value="">Pick a category</option>
           <option value="BUSINESS">Business</option>
           <option value="PERSONLA">Personal</option>
@@ -69,7 +85,7 @@ const EditNotePage = () => {
         
 
 
-      <button className="btn btn-primary d-flex justify-content-center" style={{width:"100%"}}>Add Note</button>
+      <button className="btn btn-primary d-flex justify-content-center" style={{width:"100%"}}>save update</button>
     </form>
   )
 }
