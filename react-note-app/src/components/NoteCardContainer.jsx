@@ -8,7 +8,7 @@ const NoteCardContainer = ({notes, loading}) => {
     <div className="container">
     <div className="note-has-grid row">
       {loading && <Loader loading={loading}/>}
-      {notes.map(note=><NoteCard key={note.slug} note={note}/>)}
+      {notes.map(note=><NoteCard key={note.id} note={note}/>)}
       
      
       

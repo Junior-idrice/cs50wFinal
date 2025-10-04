@@ -8,7 +8,7 @@ const Modal = ({handleIsOpen, deleteNote}) => {
     const handleDeleteNote = () => {
         deleteNote()
         navigate("/")
-        toast.success("Note deleted successfully!")
+        toast.success("Note deleted successfully")
 
     }
 

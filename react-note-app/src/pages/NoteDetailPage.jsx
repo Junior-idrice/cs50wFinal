@@ -6,10 +6,18 @@ import { FiEdit } from "react-icons/fi";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { FormatDate } from "../components/FormatDate";
+import Modal from "../components/Modal";
 
 
-const NotePage = () => {
+const NotePage = ({deleteNote}) => {
 
+  const [isOpen, setIsOpen] = useState(false)
+  const handleIsOpen = ()=>{
+
+    setIsOpen(!isOpen)
+    
+  }
+  
   const [note, setNote]=useState({})
   const {slug}=useParams()
   useEffect(()=>{
@@ -37,7 +45,9 @@ const NotePage = () => {
         <button className="btn btn-primary"><FiEdit /><span>Edit</span></button>
         </Link>
       
-      <button className="btn btn-danger"><BiSolidTrashAlt /><span>Delete</span></button>
+      <button className="btn btn-danger"
+      onClick={handleIsOpen}
+      ><BiSolidTrashAlt /><span>Delete</span></button>
     </span>
     <p className="description">
       {note.body}
@@ -48,6 +58,8 @@ const NotePage = () => {
     
 
   </div>
+
+  {isOpen && <Modal handleIsOpen={handleIsOpen} deleteNote={()=>deleteNote(slug)}/>}
  
   </>
   );

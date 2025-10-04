@@ -13,6 +13,18 @@ const App = () => {
 
   const[notes,setNotes] = useState([])
   const[isLoading, setIsLoading] =useState(false)
+  const [filterText, setFilterText] = useState("")
+
+
+  const handleFilterText = (val)=>{
+    setFilterText(val)
+  }
+  const filterNotes = filterText === "BUSINESS"
+  ?notes.filter(note=>note.category == "BUSINESS")
+  :filterText === "PERSONLA"? notes.filter(note=>note.category == "PERSONLA")
+  :filterText === "IMPORTANT"? notes.filter(note=>note.category == "IMPORTANT"):
+  notes
+
 
   useEffect(()=>{
     setIsLoading(true)
@@ -55,15 +67,26 @@ const App = () => {
     })
   }
 
+  const deleteNote = (slug)=>{
+    axios.delete(`http://127.0.0.1:8000/notes/${slug}/`)
+    .then(res=>{
+      setNotes([...notes])
+    })
+    .catch(err=>{
+      console.log(err.message)
+    })
+  }
+
 
 
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<MainLayout/>}>
-      <Route index element={<HomePage notes={notes} loading = {isLoading}/>} />
+      <Route index element={<HomePage 
+      notes={filterNotes} loading = {isLoading}  handleFilterText={ handleFilterText}/>} />
       <Route path="/add-note" element={<AddNotePage addNote={addNote} />} />
       <Route path="/edit-note/:slug" element={<EditNotePage updateNote={updateNote}/> }/>
-      <Route path="/notes/:slug" element={<NoteDetailPage/>}/>
+      <Route path="/notes/:slug" element={<NoteDetailPage deleteNote={deleteNote}/>}/>
       
       </Route>
       
