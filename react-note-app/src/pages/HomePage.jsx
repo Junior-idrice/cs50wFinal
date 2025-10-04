@@ -1,5 +1,5 @@
 import React from 'react'
-import Filter from '../components/filter'
+import Filter from '../components/Filter'
 import NoteCardContainer from '../components/NoteCardContainer'
 
 
