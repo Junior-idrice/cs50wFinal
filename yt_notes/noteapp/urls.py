@@ -7,6 +7,6 @@ urlpatterns = [
     path("notes-search/",views.search_notes, name='note-search')
 ]
 
-#end point:
+#end point: for the API call
 #http://127.0.0.1:8000/notes/
 #http://127.0.0.1:8000/notes/note-slug/
