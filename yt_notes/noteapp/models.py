@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 from django.utils.crypto import get_random_string
 
-# Create your models here.
+
 
 class Note(models.Model):
     CATEGORY = (('BUSINESS','Business'),
@@ -31,12 +31,10 @@ class Note(models.Model):
         self.slug = slug
         super().save(*args, **kwargs)'''
     def save(self, *args, **kwargs):
-        # Only generate slug if it doesn't exist already
         if not self.slug:
             slug_base = slugify(self.title)
             slug = slug_base
 
-            # Ensure uniqueness
             while self.__class__.objects.filter(slug=slug).exists():
                 slug = f'{slug_base}-{get_random_string(5)}'
 
