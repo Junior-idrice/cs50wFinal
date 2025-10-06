@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from django.db.models import Q
 #implement and interface for the user to login
+#it should be link to react and app
 
 
 @api_view(["GET","POST"])
