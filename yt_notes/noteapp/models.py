@@ -2,6 +2,8 @@ from django.db import models
 from django.utils.text import slugify
 from django.utils.crypto import get_random_string
 
+#have to change the name personla to personal
+
 
 
 class Note(models.Model):
