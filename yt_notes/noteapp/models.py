@@ -11,7 +11,7 @@ class Note(models.Model):
                 ('PERSONLA','Personal'),
                 ('IMPORTANT','Important'))
     
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notes')
     title = models.CharField(max_length=100)
     body = models.TextField()
     slug = models.SlugField(unique=True, blank=True,null=True)
