@@ -49,3 +49,6 @@ def search_notes(request):
     notes = Note.objects.filter(Q(title__icontains=query) | Q(body__icontains=query) | Q(category__icontains=query))
     serializer = NoteSerializer(notes, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+#soon creating view for the user login and register
