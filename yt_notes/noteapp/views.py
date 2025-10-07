@@ -52,3 +52,4 @@ def search_notes(request):
 
 
 #soon creating view for the user login and register
+#we need function and api to handle user interface and all the rest
