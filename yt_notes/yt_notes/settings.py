@@ -151,3 +151,9 @@ CSRF_TRUSTED_ORIGINS = [
     "https://cs50wfinal-1.onrender.com",     # trust backend domain
     "https://cs50wfinali.onrender.com",
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
